@@ -9,7 +9,8 @@ public class Panier {
 	
     //groupe 1
     public Panier(int contenanceMax){  //initialise un panier vide ayant une certaine contenance maximale (precisee en parametre)
-	
+	fruits = new ArrayList<Fruit>();
+	this.contenanceMax = contenanceMax;
     }
 
     @Override
@@ -36,27 +37,39 @@ public class Panier {
 
     //groupe 3
     public Fruit getFruit(int i){  //accesseur retournant le fruit contenu dans le panier a l'emplacement n°i ou null s'il n'y a rien a cet emplacement
-    if(fruits[i] != null)
-    return fruits[i];
-    else
-	return null;
+        Fruit res = null;
+        if (contenanceMax > i)
+            res = fruits.get(i);
+        return res;
     }
     
     public void setFruit(int i, Fruit f){  //modificateur du fruit contenu dans le panier a l'emplacement n°i par f (s'il y a bien deja un fruit a cet emplacement, ne rien faire sinon)
-    if(fruits[i] != NULL)
-    fruits[i] = f ;
-    
+        if (contenanceMax > i)
+                fruits.set(i, f);
+        
 	
     }
     
     public boolean estVide(){  //predicat indiquant que le panier est vide
     
     
-	return false;
+        boolean res = true;
+        for (int i = 0; i < contenanceMax; i++){
+            if (fruits.get(i) != null){
+                res = false;
+            }
+        }
+	    return res;
     }
     
     public boolean estPlein(){  //predicat indiquant que le panier est plein
-	return false;
+        boolean res = true;
+        for (int i = 0; i < contenanceMax; i++){
+            if (fruits.get(i) == null){
+                res = false;
+            }
+        }
+	    return res;
     }
 
     //groupe 4
